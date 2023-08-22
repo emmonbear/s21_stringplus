@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "type_traits": "c",
+        "s21_sprintf.h": "c",
+        "s21_string.h": "c"
+    }
+}
