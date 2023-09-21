@@ -1,3 +1,4 @@
+#include <check.h>
 #include <string.h>
 
 #include "../s21_string.h"
@@ -2673,6 +2674,46 @@ START_TEST(test_trim_8) {
 }
 END_TEST
 
+START_TEST(test_trim_9) {
+  char str[] = "\tqwerty\t";
+  char trim_ch[] = "";
+  char *expected = "qwerty";
+  char *result = s21_trim(str, trim_ch);
+  ck_assert_str_eq(result, expected);
+  if (result) free(result);
+}
+END_TEST
+
+START_TEST(test_trim_10) {
+  char str[] = "\nqwerty\n";
+  char trim_ch[] = "";
+  char *expected = "qwerty";
+  char *result = s21_trim(str, trim_ch);
+  ck_assert_str_eq(result, expected);
+  if (result) free(result);
+}
+END_TEST
+
+START_TEST(test_trim_11) {
+  char str[] = "  \t\nqwerty \n \t";
+  char trim_ch[] = "";
+  char *expected = "qwerty";
+  char *result = s21_trim(str, trim_ch);
+  ck_assert_str_eq(result, expected);
+  if (result) free(result);
+}
+END_TEST
+
+START_TEST(test_trim_12) {
+  char str[] = "  \t\nqwerty \n \t";
+  char *trim_ch = NULL;
+  char *expected = "qwerty";
+  char *result = s21_trim(str, trim_ch);
+  ck_assert_str_eq(result, expected);
+  if (result) free(result);
+}
+END_TEST
+
 Suite *s21_string_suite(void) {
   Suite *suite = suite_create("s21_string");
 
@@ -2869,6 +2910,10 @@ Suite *s21_string_suite(void) {
   tcase_add_test(tc_upper, test_trim_6);
   tcase_add_test(tc_upper, test_trim_7);
   tcase_add_test(tc_upper, test_trim_8);
+  tcase_add_test(tc_upper, test_trim_9);
+  tcase_add_test(tc_upper, test_trim_10);
+  tcase_add_test(tc_upper, test_trim_11);
+  tcase_add_test(tc_upper, test_trim_12);
   suite_add_tcase(suite, tc_trim);
 
   return suite;
